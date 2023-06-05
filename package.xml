@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>prepare_benchmarks</name>
+  <version>0.0.0</version>
+  <description>The prepare_benchmarks package</description>
+
+  <maintainer email="george@todo.todo">george</maintainer>
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>boost</build_depend>
+  <build_depend>yaml-cpp</build_depend>
+  <build_depend>eigen</build_depend>
+  <build_depend>octomap</build_depend>
+  <build_depend>roscpp</build_depend>
+
+  <build_export_depend>boost</build_export_depend>
+  <build_export_depend>yaml-cpp</build_export_depend>
+  <build_export_depend>eigen</build_export_depend>
+  <build_export_depend>octomap</build_export_depend>
+  <build_export_depend>roscpp</build_export_depend>
+
+  <!--<exec_depend>yaml-cpp</exec_depend>-->
+  <!--<exec_depend>eigen</exec_depend>-->
+  <!--<exec_depend>octomap</exec_depend>-->
+  <!--<exec_depend>roscpp</exec_depend>-->
+</package>
