@@ -1,12 +1,15 @@
 #include "prepare_benchmarks.h"
-#include <Eigen/Core>
 #include <boost/algorithm/hex.hpp>
 #include <boost/iostreams/device/back_inserter.hpp>
 #include <boost/iostreams/filter/zlib.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
+#include <cstdint>
+#include <Eigen/Core>
 #include <iostream>
 #include <octomap/octomap.h>
+#include <vector>
 #include <yaml-cpp/yaml.h>
+
 
 namespace benchmarks {
     template<typename T>
@@ -117,13 +120,14 @@ namespace benchmarks {
             }
 
             //// Print leaf info
-            //std::cout << "depth: " << leaf_itr.getDepth() << '\n'
-            //          << "occupancy: " << leaf_itr->getOccupancy() << '\n'
-            //          << "log odds: " << leaf_itr->getLogOdds() << '\n'
-            //          << "size: " << leaf_itr.getSize() << '\n'
-            //          << "center coord.:  [" << leaf_itr.getCoordinate().x() << ", "
-            //          << leaf_itr.getCoordinate().y() << ", " << leaf_itr.getCoordinate().z()
-            //          << "]\n------------------\n";
+            // std::cout << "depth: " << leaf_itr.getDepth() << '\n'
+            //           << "occupancy: " << leaf_itr->getOccupancy() << '\n'
+            //           << "log odds: " << leaf_itr->getLogOdds() << '\n'
+            //           << "size: " << leaf_itr.getSize() << '\n'
+            //           << "center coord.:  [" << leaf_itr.getCoordinate().x() << ", "
+            //           << leaf_itr.getCoordinate().y() << ", " <<
+            //           leaf_itr.getCoordinate().z()
+            //           << "]\n------------------\n";
         }
 
         return occupied_voxels;
@@ -134,8 +138,8 @@ namespace benchmarks {
         -> std::vector<Eigen::Vector3d> {
         YAML::Node const & node = YAML::LoadFile(file_path);
 
-        //Eigen::Vector3d position(3);
-        //Eigen::Vector3d orientation(4);
+        // Eigen::Vector3d position(3);
+        // Eigen::Vector3d orientation(4);
         std::string data;
         double resolution = 0;
 
@@ -145,16 +149,16 @@ namespace benchmarks {
         (void)readFromYAML(resolution, node["world"]["octomap"]["octomap"]["resolution"]);
 
         //// Print data from yaml
-        //std::cout << "position: " << '\n';
-        //for (auto const & i : position) {
-        //    std::cout << "  " << i << '\n';
-        //}
-        //std::cout << "orientation: " << '\n';
-        //for (auto const & i : orientation) {
-        //    std::cout << "  " << i << '\n';
-        //}
-        //std::cout << "data: " << data << '\n';
-        //std::cout << "resolution: " << resolution << '\n';
+        // std::cout << "position: " << '\n';
+        // for (auto const & i : position) {
+        //     std::cout << "  " << i << '\n';
+        // }
+        // std::cout << "orientation: " << '\n';
+        // for (auto const & i : orientation) {
+        //     std::cout << "  " << i << '\n';
+        // }
+        // std::cout << "data: " << data << '\n';
+        // std::cout << "resolution: " << resolution << '\n';
 
         octomap::OcTree const & tree = createTreeFromData(resolution, data);
         double const occupancy_threshold = 0.5;
@@ -163,18 +167,18 @@ namespace benchmarks {
             getOccupiedVoxelsFromTree(tree, occupancy_threshold);
 
         //// Print occupied voxels
-        //std::cout << "OCCUPIED VOXELS" << '\n';
-        //for (auto const & voxel : occupied_voxels) {
-        //    std::cout << voxel[0] << ", " << voxel[1] << ", " << voxel[2] << '\n';
-        //}
+        // std::cout << "OCCUPIED VOXELS" << '\n';
+        // for (auto const & voxel : occupied_voxels) {
+        //     std::cout << voxel[0] << ", " << voxel[1] << ", " << voxel[2] << '\n';
+        // }
 
         return occupied_voxels;
     }
 }  // namespace benchmarks
 
 
-//auto main() -> int {
-//    std::string const file_path =
-//        "/home/ubuntu/panda_benchmarks/box_panda/scene_sensed0001.yaml";
-//    auto occupied_voxels = benchmarks::readOccupiedVoxelsFromYAML(file_path);
-//}
+// auto main() -> int {
+//     std::string const file_path =
+//         "/home/ubuntu/panda_benchmarks/box_panda/scene_sensed0001.yaml";
+//     auto occupied_voxels = benchmarks::readOccupiedVoxelsFromYAML(file_path);
+// }

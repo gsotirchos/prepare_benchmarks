@@ -1,5 +1,8 @@
+#include <cstdint>
 #include <Eigen/Core>
 #include <octomap/octomap.h>
+#include <string>
+#include <vector>
 #include <yaml-cpp/yaml.h>
 
 
@@ -11,8 +14,7 @@ namespace benchmarks {
     // Converts a hex sequence in a string to a vector of integers.
     auto decompressHex(const std::string & hex) -> std::vector<int8_t>;
 
-    // Creates an OcTree from with a specified resolution and fills it with
-    // specified data.
+    // Creates an OcTree from with a specified resolution and fills it with specified data.
     auto createTreeFromData(double resolution, std::string const & data) -> octomap::OcTree;
 
     // Stores the center coordinates of the voxels in an OcTree leaf.
@@ -22,13 +24,12 @@ namespace benchmarks {
         double const & resolution
     ) -> void;
 
-    // Returns a vector with the center coordinates of the occupied voxels
-    // from an OcTree.
+    // Returns a vector with the center coordinates of the occupied voxels from an OcTree.
     auto getOccupiedVoxelsFromTree(octomap::OcTree const & tree, double occupancy_threshold)
         -> std::vector<Eigen::Vector3d>;
 
-    // Returns a vector with the center coordinates of the occupied voxels
-    // from a planning scene message stored in a yaml file.
+    // Returns a vector with the center coordinates of the occupied voxels from a planning
+    // scene message stored in a yaml file.
     auto readOccupiedVoxelsFromYAML(std::string const & file_path)
         -> std::vector<Eigen::Vector3d>;
 }  // namespace benchmarks
